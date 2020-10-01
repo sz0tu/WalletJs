@@ -18,7 +18,7 @@ const error = document.querySelector('.error');
 let transactionID = 1;
 let iconCategory;
 let kindOf = false;
-let fundsAvailable
+let balance = 0;
 const checkCategory = (iconCategory) => {
     switch (formSelect.value) {
         case 'income':
@@ -35,6 +35,21 @@ const checkCategory = (iconCategory) => {
             break;
     }
     return iconCategory
+}
+
+const checkBalance = () => {
+    let formBalance = formAmount.value
+    if (formAmount.value[0] === '-') {
+        formBalance = formBalance.slice(1)
+        formBalance = parseFloat(formBalance)
+        balance = balance - formBalance;
+        availableMoney.textContent = balance;
+
+    } else {
+        formBalance = parseFloat(formBalance)
+        balance = balance + formBalance;
+        availableMoney.textContent = balance;
+    }
 }
 
 
@@ -85,6 +100,7 @@ const clearForm = () => {
 const createTransaction = () => {
     if (checkForm()) {
         transactionContainer();
+        checkBalance();
         statusModal()
         clearForm()
 
