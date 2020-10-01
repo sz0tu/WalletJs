@@ -43,13 +43,12 @@ const checkBalance = () => {
         formBalance = formBalance.slice(1)
         formBalance = parseFloat(formBalance)
         balance = balance - formBalance;
-        availableMoney.textContent = balance;
 
     } else {
         formBalance = parseFloat(formBalance)
         balance = balance + formBalance;
-        availableMoney.textContent = balance;
     }
+    availableMoney.textContent = balance;
 }
 
 
@@ -126,7 +125,11 @@ const deleteAll = () => {
 }
 
 const deleteNote = id => {
-    const el = document.getElementById(id);
+    el = document.getElementById(id);
+    let price = el.querySelector('.transaction-amount');
+    price = parseFloat(price.textContent)
+    balance = balance - price;
+    availableMoney.textContent = balance;
     el.remove();
 }
 
